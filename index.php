@@ -2,13 +2,13 @@
 
 $path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
-spl_autoload_register(function (string $class_name){
-    $file = __DIR__."/".str_replace("\\","/",$class_name.".php");
-    if(file_exists($file)){
+spl_autoload_register(function (string $class_name) {
+    $file = __DIR__ . "/" . str_replace("\\", "/", $class_name . ".php");
+    if (file_exists($file)) {
         // example C:\laragon\www\simple_mvc + App\Framework\Router.php
         // then require it
         require_once $file;
-    }else{
+    } else {
         exit("Class $class_name file not found");
     }
 });
@@ -17,13 +17,14 @@ spl_autoload_register(function (string $class_name){
 // make obj from class
 $router = new App\Framework\Router();
 
-$router->add('admin/{controller}/{action}',["namespace" => "Admin"]);
-
-$router->add('/{title}/{id:\d+}/{page:\d+}',
-    ["controller" => "ArticleController", "action" => "showPage"]);
 // this route is base root / home root
 $router->add('/',
     ["controller" => "HomeController", "action" => "index"]);
+
+$router->add('/{title}/{id:\d+}/{page:\d+}',
+    ["controller" => "ArticleController", "action" => "showPage"]);
+
+
 $router->add('/home/index',
     ["controller" => "HomeController", "action" => "index"]);
 
@@ -32,7 +33,9 @@ $router->add("/articles/index",
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
-$router->add('/{controller}/{action}');
+// $router->add('admin/{controller}/{action}', ["namespace" => "Admin"]);
+
+// $router->add('/{controller}/{action}');
 
 
 $dispatcher = new App\Framework\Dispatcher($router);
