@@ -38,8 +38,8 @@ $router->add('/article/show/{id}',
 // $router->add('/{controller}/{action}');
 
 
-$dispatcher = new App\Framework\Dispatcher($router);
-$dispatcher->handle($path);
+//$dispatcher = new App\Framework\Dispatcher($router);
+//$dispatcher->handle($path);
 
 
 
