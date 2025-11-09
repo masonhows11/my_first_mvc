@@ -16,20 +16,23 @@ class Router
         ];
     }
 
-    // /user/15/profile from request
+    // /article/show/{id}  from request
     // GET /user/{id}/profile → UserController@show -> saved routes
     // now what url turn to regex then compare/match to saved url
 
     public function matchUrl($current_url)
     {
-        var_dump($current_url);
+        $params = [];
+        foreach ($this->routes as $route) {
+
+
+        }
     }
 
     public function routeList(): void
     {
         print_r($this->routes);
     }
-
 
 
 }
