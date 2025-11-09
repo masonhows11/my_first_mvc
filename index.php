@@ -33,8 +33,9 @@ $router->add("/articles/index",
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
-// $router->add('admin/{controller}/{action}', ["namespace" => "Admin"]);
 
+
+// $router->add('admin/{controller}/{action}', ["namespace" => "Admin"]);
 // $router->add('/{controller}/{action}');
 
 
