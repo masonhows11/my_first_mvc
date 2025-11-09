@@ -34,7 +34,7 @@ $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
 
-var_dump($current_url);
+$router->matchUrl($current_url);
 
 
 

@@ -20,9 +20,9 @@ class Router
     // GET /user/{id}/profile → UserController@show -> saved routes
     // now what url turn to regex then compare/match to saved url
 
-    public function matchUrl()
+    public function matchUrl($current_url)
     {
-
+        var_dump($current_url);
     }
 
     public function routeList(): void
