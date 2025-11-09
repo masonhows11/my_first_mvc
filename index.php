@@ -1,6 +1,6 @@
 <?php
 
-$path = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
+$current_url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 spl_autoload_register(function (string $class_name) {
     $file = __DIR__ . "/" . str_replace("\\", "/", $class_name . ".php");
@@ -32,6 +32,9 @@ $router->add("/articles/index",
     ["controller" => "ArticleController", "action" => "index"]);
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
+
+
+var_dump($current_url);
 
 
 
