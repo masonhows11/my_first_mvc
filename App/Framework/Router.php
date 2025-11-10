@@ -7,6 +7,8 @@ class Router
 
     private array $routes = [];
 
+
+
     public function add(string $path, array $params = [], array $namespace = []): void
     {
         $this->routes[] = [
@@ -44,7 +46,11 @@ class Router
         //        }
         // $pattern = $this->getPatternFromUrl($current_url);
 
-        $path = "/article/show/{id}";
+        // $path = "/article/show/{id}";
+        // $path = "/articles";
+        // $path = "/home/index";
+        // $path = "/products/{id}";
+         $path = "/article/{slug}";
         $pattern = $this->getPatternFromUrl($path);
         var_dump($pattern);
 
@@ -71,7 +77,7 @@ class Router
 
             if (preg_match("/{([a-zA-Z0-9_]*)\}$/", $item, $matches)) {
 
-                $pattern [] .= "(?< .$matches[1]. >[^\.]+)";
+                $pattern [] .= "(?<$matches[1]>[^\.]+)";
 
             } elseif (preg_match("/^([a-zA-Z0-9]*)$/", $item, $matches)) {
 
