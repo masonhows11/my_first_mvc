@@ -29,8 +29,8 @@ class Router
     {
         $params = [];
         // to clean the url
-        $current_url = urldecode($current_url);
-        $current_url = trim($current_url, "/");
+        // $current_url = urldecode($current_url);
+        // $current_url = trim($current_url, "/");
         //        foreach ($this->routes as $route) {
         //
         //            // $pattern = $this->getPatternFromUrl($current_url);
@@ -46,51 +46,48 @@ class Router
         //        }
         // $pattern = $this->getPatternFromUrl($current_url);
 
-        // $path = "/article/show/{id}";
+        $path = "/article/show/{id}";
         // $path = "/articles";
         // $path = "/home/index";
         // $path = "/products/{id}";
-         $path = "/article/{slug}";
+        // $path = "/article/{slug}";
+        $current_url = urldecode($current_url);
+        $current_url = trim($current_url, "/");
         $pattern = $this->getPatternFromUrl($path);
         var_dump($pattern);
 
-        //        if (preg_match($pattern, $current_url, $matches))
-        //        {
-        //            $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-        //            $params = array_merge($matches, $route['params']);
-        //        }
-        //
-        //        return $params;
-        //        return false;
-
+        if (preg_match($pattern, $current_url, $matches)) {
+            $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
+            return $matches;
+            //$params = array_merge($matches, $route['params']);
+        } else {
+            return false;
+        }
     }
 
     private function getPatternFromUrl($path)
     {
         // article/show/{id}
         $pattern = [];
-
         $path = trim($path, "/");
         $path = explode("/", $path);
-
+       
         foreach ($path as $item) {
 
             if (preg_match("/{([a-zA-Z0-9_]*)\}$/", $item, $matches)) {
 
-                $pattern [] .= "(?<$matches[1]>[^\.]+)";
+                $pattern[] .= '(?<'.$matches[1]. '>[^\.]+)';
 
-            } elseif (preg_match("/^([a-zA-Z0-9]*)$/", $item, $matches)) {
+            } elseif (preg_match("/^([a-zA-Z0-9_]*)$/", $item, $matches)) {
 
-                $pattern [] .= '('.$matches[1].')';
+                $pattern[] .= '([a-zA-Z0-9_]+)';
             }
         }
-        return "/^" . implode("/", $pattern) . "/$";
+        return '/^' . implode("\/", $pattern) . '$/';
     }
 
     public function routeList(): void
     {
         print_r($this->routes);
     }
-
-
 }
