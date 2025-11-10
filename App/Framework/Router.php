@@ -20,6 +20,8 @@ class Router
     // GET /user/{id}/profile → UserController@show -> saved routes
     // now what url turn to regex then compare/match to saved url
     // generally we make a dynamic pattern based on current url
+    // but make dynamic pattern on each route saved in routes array
+    // then compare with currentUrl
 
     public function matchUrl($current_url): false|array
     {
@@ -29,7 +31,7 @@ class Router
             // $pattern = $this->getPatternFromUrl($current_url);
             $pattern = $this->getPatternFromUrl($route['path']);
 
-            if (preg_match($pattern, $route['path'], $matches)) {
+            if (preg_match($pattern, $current_url, $matches)) {
 
                 $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
 
