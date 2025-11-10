@@ -7,7 +7,7 @@ class Router
 
     private array $routes = [];
 
-    public function add(string $path, array $params = [], string $namespace = null): void
+    public function add(string $path, array $params = [], array $namespace = []): void
     {
         $this->routes[] = [
             'path' => $path,
