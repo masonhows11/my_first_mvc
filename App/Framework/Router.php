@@ -26,6 +26,9 @@ class Router
     public function matchUrl($current_url): false|array
     {
         $params = [];
+        // to clean the url
+        $current_url = urldecode($current_url);
+        $current_url = trim($current_url,"/");
         foreach ($this->routes as $route) {
 
             // $pattern = $this->getPatternFromUrl($current_url);
