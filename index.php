@@ -33,7 +33,9 @@ $router->add("/articles/index",
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
-$url  = '/article/show/23';
+// $url  = '/article/show/23';
+// $url  = '/articles/index';
+$url = '/article/show/23/art-one';
 $result = $router->matchUrl($url);
 var_dump($result);
 
