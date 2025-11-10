@@ -28,6 +28,7 @@ class Router
     public function matchUrl($current_url)
     {
         $params = [];
+
         // to clean the url
         // $current_url = urldecode($current_url);
         // $current_url = trim($current_url, "/");
@@ -45,33 +46,33 @@ class Router
         //            return $params;
         //        }
         // $pattern = $this->getPatternFromUrl($current_url);
-
         // $path = "/article/show/{id}";
         // $path = "/articles";
         // $path = "/home/index";
         // $path = "/products/{id}";
         // $path = "/article/{slug}";
         // $path = "/articles/index";
-        
-        $path = "/article/show/{id}/{slug}";
+        // $path = "/article/show/{id}/{slug}";
 
         $current_url = urldecode($current_url);
         $current_url = trim($current_url, "/");
-        $pattern = $this->getPatternFromUrl($path);
-        var_dump($pattern);
 
-        if (preg_match($pattern, $current_url, $matches)) {
-            $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-            // $params = array_merge($matches, $route['params']);
-            return $matches;
-        } else {
+        foreach ($this->routes as $route) {
+
+            $pattern = $this->getPatternFromUrl($route['path']);
+
+            if (preg_match($pattern, $current_url, $matches)) {
+                $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
+                $params = array_merge($matches, $route['params']);
+                return $params;
+            }
             return false;
         }
     }
 
     private function getPatternFromUrl($path)
     {
-        // article/show/{id}
+       
         $pattern = [];
         $path = trim($path, "/");
         $path = explode("/", $path);

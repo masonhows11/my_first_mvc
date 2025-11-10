@@ -35,8 +35,9 @@ $router->add('/article/show/{id}',
 
 // $url  = '/article/show/23';
 // $url  = '/articles/index';
-$url = '/article/show/23/art-one';
-$result = $router->matchUrl($url);
+// $url = '/article/show/23/art-one';
+
+$result = $router->matchUrl($current_url);
 var_dump($result);
 
 
