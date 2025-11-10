@@ -81,7 +81,7 @@ class Router
 
             } elseif (preg_match("/^([a-zA-Z0-9]*)$/", $item, $matches)) {
 
-                $pattern [] .= '(' . $matches[1] . ')';
+                $pattern [] .= '('.$matches[1].')';
             }
         }
         return "/^" . implode("/", $pattern) . "/$";
