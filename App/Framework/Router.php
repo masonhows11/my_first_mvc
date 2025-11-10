@@ -46,9 +46,17 @@ class Router
 
     }
 
-    private function getPatternFromUrl($current_url)
+    private function getPatternFromUrl($path)
     {
+        $finalPattern = null;
 
+        $path = trim($path,"/");
+        $path = explode("/", $path);
+        foreach ($path as $item) {
+
+
+
+        }
         //return 'hello';
     }
 
