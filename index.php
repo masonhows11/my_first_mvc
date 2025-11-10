@@ -35,6 +35,7 @@ $router->add('/article/show/{id}',
 
 
 $result = $router->matchUrl($current_url);
+var_dump($result);
 
 
 

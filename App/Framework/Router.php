@@ -23,41 +23,62 @@ class Router
     // but make dynamic pattern on each route saved in routes array
     // then compare with currentUrl
 
-    public function matchUrl($current_url): false|array
+    public function matchUrl($current_url)
     {
         $params = [];
         // to clean the url
         $current_url = urldecode($current_url);
-        $current_url = trim($current_url,"/");
-        foreach ($this->routes as $route) {
+        $current_url = trim($current_url, "/");
+        //        foreach ($this->routes as $route) {
+        //
+        //            // $pattern = $this->getPatternFromUrl($current_url);
+        //            $pattern = $this->getPatternFromUrl($route['path']);
+        //
+        //            if (preg_match($pattern, $current_url, $matches)) {
+        //
+        //                $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
+        //
+        //                $params = array_merge($matches, $route['params']);
+        //            }
+        //            return $params;
+        //        }
+        // $pattern = $this->getPatternFromUrl($current_url);
 
-            // $pattern = $this->getPatternFromUrl($current_url);
-            $pattern = $this->getPatternFromUrl($route['path']);
+        $path = "/article/show/{id}";
+        $pattern = $this->getPatternFromUrl($path);
+        var_dump($pattern);
 
-            if (preg_match($pattern, $current_url, $matches)) {
-
-                $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-
-                $params = array_merge($matches, $route['params']);
-            }
-            return $params;
-        }
-        return false;
+        //        if (preg_match($pattern, $current_url, $matches))
+        //        {
+        //            $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
+        //            $params = array_merge($matches, $route['params']);
+        //        }
+        //
+        //        return $params;
+        //        return false;
 
     }
 
     private function getPatternFromUrl($path)
     {
-        $finalPattern = null;
+        // article/show/{id}
+        $pattern = [];
 
-        $path = trim($path,"/");
+        $path = trim($path, "/");
         $path = explode("/", $path);
+
         foreach ($path as $item) {
 
+            if (preg_match("/{([a-zA-Z0-9_]*)\}$/", $item, $matches)) {
 
+                $pattern [] .= "(?< .$matches[1]. >[^\.]+)";
 
+            } elseif (preg_match("/^([a-zA-Z0-9]*)$/", $item, $matches)) {
+
+                $pattern [] .= '(' . $matches[1] . ')';
+            }
         }
-        //return 'hello';
+        return "/^" . implode("/", $pattern) . "/$";
     }
 
     public function routeList(): void
