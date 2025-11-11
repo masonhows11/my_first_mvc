@@ -8,7 +8,7 @@ class Router
     private array $routes = [];
 
 
-    public function add(string $path, array $params = [], array $namespace = []): void
+    public function add(string $path, array $params = [], string $namespace = ''): void
     {
         $this->routes[] = [
             'path' => $path,
@@ -26,12 +26,7 @@ class Router
 
     public function matchUrl($current_url): false|array
     {
-        $matchesParams = [
-            'params' => [],
-            'controller' => null,
-            'action' => null,
-            'namespace' => null
-        ];
+
         $current_url = urldecode($current_url);
         $current_url = trim($current_url, "/");
 
@@ -40,7 +35,12 @@ class Router
             if (preg_match($pattern, $current_url, $matches)) {
                 $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
 
-                //return array_merge($matches, $route['params']);
+                return [
+                    'params' => $matches,
+                    'controller' => $route['params']['controller'],
+                    'action' => $route['params']['action'],
+                    'namespace' => $route['namespace']
+                ];
             }
 
         }

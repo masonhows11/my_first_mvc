@@ -16,24 +16,29 @@ class Dispatcher
 
     public function dispatch($segments)
     {
-                var_dump($segments);
-                exit();
-        $controller = $segments[1];
-        $action = $segments[2];
+
+        $controller = $segments['controller'];
+        $action = $segments['action'];
+
         $controller_obj = null;
 
-        $controllerName = ucfirst($controller) . 'Controller';
-        $controller = ucfirst($controller) . 'Controller.php';
-
-        if (file_exists("src/controllers/" . $controller)) {
-            require "src/controllers/$controller";
+        $controllerName = ucfirst($controller);
+        $controller = ucfirst($controller) . '.php';
+        // var_dump($controllerName, $controller);
+        if (file_exists("App/Controllers/" . $controller)) {
+            require "App/Controllers/$controller";
         } else {
-            var_dump('nok');
+            var_dump("$controller file not found");
         }
 
 
         $controller_obj = new $controllerName;
         $controller_obj->$action();
+
+        //$controllerName = ucfirst($controller) . 'Controller';
+        //$controller = ucfirst($controller) . 'Controller.php';
     }
+
+
 
 }

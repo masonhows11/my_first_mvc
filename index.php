@@ -4,6 +4,7 @@ $current_url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 spl_autoload_register(function (string $class_name) {
     $file = __DIR__ . "/" . str_replace("\\", "/", $class_name . ".php");
+    var_dump($file);
     if (file_exists($file)) {
         // example C:\laragon\www\simple_mvc + App\Framework\Router.php
         // then require it
@@ -37,14 +38,14 @@ $router->add('/article/me/{id}/{slug}',
     ["controller" => "ArticleController", "action" => "me"]);
 
 
-$path = $router->matchUrl($current_url);
-if ($path === false) {
+$segments = $router->matchUrl($current_url);
+if ($segments === false) {
 
     echo("404 Requested Route Not Found ");
 
 } else {
     $dispatcher = new App\Framework\Dispatcher($router);
-    $dispatcher->dispatch($path);
+    $dispatcher->dispatch($segments);
 }
 
 
