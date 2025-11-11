@@ -65,6 +65,8 @@ class Router
         return '#^' . implode("/", $pattern) . '$#';
     }
 
+
+
     public function routeList(): void
     {
         print_r($this->routes);

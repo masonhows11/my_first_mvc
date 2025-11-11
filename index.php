@@ -37,31 +37,21 @@ $router->add('/article/me/{id}/{slug}',
     ["controller" => "ArticleController", "action" => "me"]);
 
 
-$result = $router->matchUrl($current_url);
-var_dump($result);
+$path = $router->matchUrl($current_url);
+if ($path === false) {
+
+    echo("404 Requested Route Not Found ");
+
+} else {
+    $dispatcher = new App\Framework\Dispatcher($router);
+    $dispatcher->dispatch($path);
+}
 
 
-//$router->add('/{title}/{id:\d+}/{page:\d+}',["controller" => "ArticleController", "action" => "showPage"]);
+
+// $router->add('/{title}/{id:\d+}/{page:\d+}',["controller" => "ArticleController", "action" => "showPage"]);
 // $router->add('admin/{controller}/{action}', ["namespace" => "Admin"]);
 // $router->add('/{controller}/{action}');
-
-
-//$dispatcher = new App\Framework\Dispatcher($router);
-//$dispatcher->handle($path);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 //// solution 3
