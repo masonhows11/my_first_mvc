@@ -8,6 +8,7 @@ class Dispatcher
 {
 
     private Router $router;
+
     public function __construct(Router $router)
     {
         $this->router = $router;
@@ -22,39 +23,32 @@ class Dispatcher
 
         $controller_obj = null;
 
-        $controllerName = "App\\Controllers\\".ucfirst($controller);
-        // $controller = ucfirst($controller) . '.php';
-        // var_dump($controllerName, $controller);
-        //        if (file_exists("App/Controllers/" . $controller)) {
-        //            require "App/Controllers/$controller";
-        //        } else {
-        //            var_dump("$controller file not found");
-        //        }
+
+        $controllerName = $this->getController($controller);
+        $action = $this->getAction($action);
 
 
         $controller_obj = new $controllerName();
         $controller_obj->$action();
 
-        //$controllerName = ucfirst($controller) . 'Controller';
-        //$controller = ucfirst($controller) . 'Controller.php';
+
     }
-    
-    private  function getController()
+
+    private function getController($controller)
     {
-        
+        return $controllerName = "App\\Controllers\\" . ucfirst($controller);
     }
 
 
-    private function getAction()
+    private function getAction($action)
     {
-        
+        return $action;
     }
 
     private function getArguments()
     {
-        
-    }
 
+    }
 
 
 }

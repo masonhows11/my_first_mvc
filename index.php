@@ -4,7 +4,6 @@ $current_url = parse_url($_SERVER["REQUEST_URI"], PHP_URL_PATH);
 
 spl_autoload_register(function (string $class_name) {
     $file = __DIR__ . "/" . str_replace("\\", "/", $class_name . ".php");
-    var_dump($file);
     if (file_exists($file)) {
         // example C:\laragon\www\simple_mvc + App\Framework\Router.php
         // then require it
