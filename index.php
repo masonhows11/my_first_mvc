@@ -40,9 +40,7 @@ $router->add('/article/me/{id}/{slug}',
 
 $segments = $router->matchUrl($current_url);
 if ($segments === false) {
-
     echo("404 Requested Route Not Found ");
-
 } else {
     $dispatcher = new App\Framework\Dispatcher($router);
     $dispatcher->dispatch($segments);

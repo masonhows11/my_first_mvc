@@ -22,17 +22,17 @@ class Dispatcher
 
         $controller_obj = null;
 
-        $controllerName = ucfirst($controller);
-        $controller = ucfirst($controller) . '.php';
+        $controllerName = "App\\Controllers\\".ucfirst($controller);
+        // $controller = ucfirst($controller) . '.php';
         // var_dump($controllerName, $controller);
-        if (file_exists("App/Controllers/" . $controller)) {
-            require "App/Controllers/$controller";
-        } else {
-            var_dump("$controller file not found");
-        }
+        //        if (file_exists("App/Controllers/" . $controller)) {
+        //            require "App/Controllers/$controller";
+        //        } else {
+        //            var_dump("$controller file not found");
+        //        }
 
 
-        $controller_obj = new $controllerName;
+        $controller_obj = new $controllerName();
         $controller_obj->$action();
 
         //$controllerName = ucfirst($controller) . 'Controller';
