@@ -22,12 +22,9 @@ class Dispatcher
         $action = $segments['action'];
         $namespace = $segments['namespace'];
 
-        $controller_obj = null;
 
-
-        $controllerName = $this->getController($controller,$namespace);
+        $controllerName = $this->getController($controller, $namespace);
         $action = $this->getAction($action);
-
 
         $controller_obj = new $controllerName();
         $controller_obj->$action();
@@ -35,14 +32,14 @@ class Dispatcher
 
     }
 
-    private function getController($controller,$namespace)
+    private function getController($controller, $namespace)
     {
-        $default = "App\\Controllers\\";
+        $default_namespace = "App\\Controllers\\";
         // if namespace not null then add namespace to default
         // If a class is located in a different namespace from the main directory,
         // execute that controller from there.
-        if (empty($namespace)) {
-
+        if (!empty($namespace)) {
+            return $default_namespace .=  $namespace . "\\" . ucfirst($controller);
         }
         return $controllerName = "App\\Controllers\\" . ucfirst($controller);
     }

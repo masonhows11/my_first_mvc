@@ -36,7 +36,13 @@ $router->add('/article/single/{slug}',
 $router->add('/article/me/{id}/{slug}',
     ["controller" => "ArticleController", "action" => "me"]);
 
-$router->add('admin/index',["controller" => "AdminController", "action" => "index"], 'Admin');
+$router->add('/admin/index',
+    ["controller" => "AdminController", "action" => "index"],
+    'Admin');
+
+$router->add('/users/index',
+    ["controller" => "UsersController", "action" => "index"],
+    'Users');
 
 $segments = $router->matchUrl($current_url);
 if ($segments === false) {
