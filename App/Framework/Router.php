@@ -8,7 +8,6 @@ class Router
     private array $routes = [];
 
 
-
     public function add(string $path, array $params = [], array $namespace = []): void
     {
         $this->routes[] = [
@@ -27,17 +26,21 @@ class Router
 
     public function matchUrl($current_url): false|array
     {
-
+        $matchesParams = [
+            'params' => [],
+            'controller' => null,
+            'action' => null,
+            'namespace' => null
+        ];
         $current_url = urldecode($current_url);
         $current_url = trim($current_url, "/");
 
         foreach ($this->routes as $route) {
-
             $pattern = $this->getPatternFromUrl($route['path']);
-            var_dump($pattern);
             if (preg_match($pattern, $current_url, $matches)) {
                 $matches = array_filter($matches, "is_string", ARRAY_FILTER_USE_KEY);
-                return  array_merge($matches, $route['params']);
+
+                //return array_merge($matches, $route['params']);
             }
 
         }
@@ -46,7 +49,7 @@ class Router
 
     private function getPatternFromUrl($path): string
     {
-       
+
         $pattern = [];
         $path = trim($path, "/");
         $path = explode("/", $path);
@@ -64,7 +67,6 @@ class Router
         }
         return '#^' . implode("/", $pattern) . '$#';
     }
-
 
 
     public function routeList(): void

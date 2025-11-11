@@ -16,8 +16,8 @@ class Dispatcher
 
     public function dispatch($segments)
     {
-        //        var_dump($segments);
-        //        exit();
+                var_dump($segments);
+                exit();
         $controller = $segments[1];
         $action = $segments[2];
         $controller_obj = null;

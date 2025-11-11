@@ -26,7 +26,7 @@ $router->add('/home/index',
 
 $router->add("/articles/index",
     ["controller" => "ArticleController", "action" => "index"]);
-
+//
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
