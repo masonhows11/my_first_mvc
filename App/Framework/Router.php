@@ -56,6 +56,7 @@ class Router
             if (preg_match("/{([a-zA-Z0-9_]*)\}$/", $item, $matches)) {
 
                 $pattern[] .= '(?<' . $matches[1] . '>[^\/\.]+)';
+
             } elseif (preg_match("/^([a-zA-Z0-9_]*)$/", $item, $matches)) {
 
                 $pattern[] .= $item;
