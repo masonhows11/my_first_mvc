@@ -33,6 +33,8 @@ $router->add('/article/show/{id}',
 $router->add('/article/single/{slug}',
     ["controller" => "ArticleController", "action" => "single"]);
 
+$router->add('/article/me/{id}/{slug}',
+    ["controller" => "ArticleController", "action" => "me"]);
 
 
 $result = $router->matchUrl($current_url);
