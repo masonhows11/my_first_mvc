@@ -41,7 +41,7 @@ class Dispatcher
         if (!empty($namespace)) {
             return $default_namespace .=  $namespace . "\\" . ucfirst($controller);
         }
-        return $controllerName = "App\\Controllers\\" . ucfirst($controller);
+        return $controller_name = "App\\Controllers\\" . ucfirst($controller);
     }
 
 
@@ -50,7 +50,7 @@ class Dispatcher
         return $action;
     }
 
-    private function getArguments()
+    private function getArguments($controller, $action)
     {
 
     }
