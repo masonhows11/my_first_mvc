@@ -38,6 +38,22 @@ class Dispatcher
         //$controllerName = ucfirst($controller) . 'Controller';
         //$controller = ucfirst($controller) . 'Controller.php';
     }
+    
+    private  function getController()
+    {
+        
+    }
+
+
+    private function getAction()
+    {
+        
+    }
+
+    private function getArguments()
+    {
+        
+    }
 
 
 
