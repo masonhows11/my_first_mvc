@@ -21,27 +21,25 @@ $router = new App\Framework\Router();
 $router->add('/',
     ["controller" => "HomeController", "action" => "index"]);
 
-$router->add('/{title}/{id:\d+}/{page:\d+}',
-    ["controller" => "ArticleController", "action" => "showPage"]);
-
-
 $router->add('/home/index',
     ["controller" => "HomeController", "action" => "index"]);
 
 $router->add("/articles/index",
     ["controller" => "ArticleController", "action" => "index"]);
+
 $router->add('/article/show/{id}',
     ["controller" => "ArticleController", "action" => "show"]);
 
-// $url  = '/article/show/23';
-// $url  = '/articles/index';
-// $url = '/article/show/23/art-one';
+$router->add('/article/single/{slug}',
+    ["controller" => "ArticleController", "action" => "single"]);
+
+
 
 $result = $router->matchUrl($current_url);
 var_dump($result);
 
 
-
+//$router->add('/{title}/{id:\d+}/{page:\d+}',["controller" => "ArticleController", "action" => "showPage"]);
 // $router->add('admin/{controller}/{action}', ["namespace" => "Admin"]);
 // $router->add('/{controller}/{action}');
 
