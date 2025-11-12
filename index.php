@@ -52,7 +52,11 @@ if ($segments === false) {
     echo("404 Requested Route Not Found ");
 } else {
     $dispatcher = new App\Framework\Dispatcher($router);
-    $dispatcher->dispatch($segments);
+    try {
+        $dispatcher->dispatch($segments);
+    } catch (ReflectionException $e) {
+        exit("Exception Dispatching Route: " . $e->getMessage());
+    }
 }
 
 

@@ -24,6 +24,7 @@ class Dispatcher
         $controller = $segments['controller'];
         $action = $segments['action'];
         $namespace = $segments['namespace'];
+        $params = $segments['params'];
 
 
         $controllerName = $this->getController($controller, $namespace);
