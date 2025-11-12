@@ -15,7 +15,10 @@ class Dispatcher
     }
 
 
-    public function dispatch($segments)
+    /**
+     * @throws \ReflectionException
+     */
+    public function dispatch($segments): void
     {
 
         $controller = $segments['controller'];
@@ -25,6 +28,8 @@ class Dispatcher
 
         $controllerName = $this->getController($controller, $namespace);
         $action = $this->getAction($action);
+        $args = $this->getArguments($controllerName,$action);
+        var_dump($args);
 
         $controller_obj = new $controllerName();
         $controller_obj->$action();
@@ -32,7 +37,7 @@ class Dispatcher
 
     }
 
-    private function getController($controller, $namespace)
+    private function getController($controller, $namespace = null): string
     {
         $default_namespace = "App\\Controllers\\";
         // if namespace not null then add namespace to default
@@ -50,9 +55,13 @@ class Dispatcher
         return $action;
     }
 
+    /**
+     * @throws \ReflectionException
+     */
     private function getArguments($controller, $action)
     {
-
+            $reflection = new ReflectionMethod($controller, $action);
+            return $reflection->class;
     }
 
 

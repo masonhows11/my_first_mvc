@@ -1,15 +1,16 @@
 <?php
 
 namespace App\Controllers;
-use App\Models\Article;
+
+//use App\Models\Article;
 
 class ArticleController
 {
 
     public function index()
     {
-        $article = new Article();
-        $posts = $article->getData();
+//        $article = new Article();
+//        $posts = $article->getData();
         require 'views/posts_view.php';
     }
 
@@ -19,8 +20,8 @@ class ArticleController
         require 'views/post_view.php';
     }
 
-    public function showPage(string $title,string $id,string $page): void
+    public function page(string $title,string $id,string $page): void
     {
-        echo "$id,$title,$page";
+        // echo "$id,$title,$page";
     }
 }

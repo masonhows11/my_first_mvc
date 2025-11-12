@@ -36,6 +36,9 @@ $router->add('/article/single/{slug}',
 $router->add('/article/me/{id}/{slug}',
     ["controller" => "ArticleController", "action" => "me"]);
 
+$router->add('/article/page/{title}/{id}/{page}',
+    ["controller" => "ArticleController", "action" => "page"]);
+
 $router->add('/admin/index',
     ["controller" => "AdminController", "action" => "index"],
     'Admin');
