@@ -61,7 +61,16 @@ class Dispatcher
     private function getArguments($controller, $action)
     {
             $reflection = new ReflectionMethod($controller, $action);
-            return $reflection->class;
+            // get the args pass to the method in class
+            $params = $reflection->getParameters();
+            foreach ($params as $param){
+                // get the name parameters/args
+                // echo "name:" . $param->getName() . PHP_EOL;
+                // if the parameters has default value display the default value
+                // if ($param->isOptional()){
+                //    echo "optional:" . $param->getName() . PHP_EOL;
+                // }
+            }
     }
 
 

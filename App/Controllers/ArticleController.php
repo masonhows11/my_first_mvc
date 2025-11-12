@@ -20,8 +20,8 @@ class ArticleController
         require 'views/post_view.php';
     }
 
-    public function page(string $title,string $id,string $page): void
+    public function page(string $title = null,int $id = null,string $page = null): void
     {
-        // echo "$id,$title,$page";
+        echo "$id,$title,$page";
     }
 }
