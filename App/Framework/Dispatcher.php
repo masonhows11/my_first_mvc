@@ -29,11 +29,12 @@ class Dispatcher
 
         $controllerName = $this->getController($controller, $namespace);
         $action = $this->getAction($action);
-        $args = $this->getArguments($controllerName,$action,$params);
+        $args = $this->getArguments($controllerName, $action, $params);
         var_dump($args);
 
         $controller_obj = new $controllerName();
-        $controller_obj->$action();
+        $controller_obj->$action(...$args);
+
 
 
     }
@@ -45,7 +46,7 @@ class Dispatcher
         // If a class is located in a different namespace from the main directory,
         // execute that controller from there.
         if (!empty($namespace)) {
-            return $default_namespace .=  $namespace . "\\" . ucfirst($controller);
+            return $default_namespace .= $namespace . "\\" . ucfirst($controller);
         }
         return $controller_name = "App\\Controllers\\" . ucfirst($controller);
     }
@@ -59,25 +60,28 @@ class Dispatcher
     /**
      * @throws \ReflectionException
      */
-    private function getArguments($controller, $action,$params)
+    private function getArguments($controller, $action, $parameters)
     {
-            $arguments = [];
-            $reflection = new ReflectionMethod($controller, $action);
-            // get the args pass to the method in class
-            $params = $reflection->getParameters();
-            foreach ($params as $param){
+        $arguments = [];
+        $reflection = new ReflectionMethod($controller, $action);
+        // get the args pass to the method in class
+        $params = $reflection->getParameters();
+        foreach ($params as $param) {
 
-
-
+            $name = $param->getName();
+            // If the parameters coming from the route match the parameters of the method,
+            // put them into a specific array.
+            if (isset($parameters[$name])) {
+                $arguments[] = $parameters[$name];
+            } elseif ($param->isDefaultValueAvailable()) {
+                $arguments[] = $param->getDefaultValue();
+            } else {
+                $arguments[] = [];
             }
-            //            foreach ($params as $param){
-            //                 get the name parameters/args
-            //                 echo "name:" . $param->getName() . PHP_EOL;
-            //                 if the parameters has default value display the default value
-            //                 if ($param->isOptional()){
-            //                    echo "optional:" . $param->getName() . PHP_EOL;
-            //                 }
-            //            }
+
+        }
+        return $arguments;
+
     }
 
 
