@@ -29,7 +29,7 @@ class Dispatcher
 
         $controllerName = $this->getController($controller, $namespace);
         $action = $this->getAction($action);
-        $args = $this->getArguments($controllerName,$action);
+        $args = $this->getArguments($controllerName,$action,$params);
         var_dump($args);
 
         $controller_obj = new $controllerName();
@@ -59,19 +59,25 @@ class Dispatcher
     /**
      * @throws \ReflectionException
      */
-    private function getArguments($controller, $action)
+    private function getArguments($controller, $action,$params)
     {
+            $arguments = [];
             $reflection = new ReflectionMethod($controller, $action);
             // get the args pass to the method in class
             $params = $reflection->getParameters();
             foreach ($params as $param){
-                // get the name parameters/args
-                // echo "name:" . $param->getName() . PHP_EOL;
-                // if the parameters has default value display the default value
-                // if ($param->isOptional()){
-                //    echo "optional:" . $param->getName() . PHP_EOL;
-                // }
+
+
+
             }
+            //            foreach ($params as $param){
+            //                 get the name parameters/args
+            //                 echo "name:" . $param->getName() . PHP_EOL;
+            //                 if the parameters has default value display the default value
+            //                 if ($param->isOptional()){
+            //                    echo "optional:" . $param->getName() . PHP_EOL;
+            //                 }
+            //            }
     }
 
 
